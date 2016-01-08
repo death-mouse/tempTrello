@@ -724,12 +724,10 @@ namespace tempTrello
             }*/
         }
 
-        
+        private void AddTask_Click(object sender, RoutedEventArgs e)
+        {
 
-        
-
-        
-        
+        }
     }
     public static class RemoveChildHelper
     {

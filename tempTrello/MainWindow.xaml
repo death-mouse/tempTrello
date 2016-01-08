@@ -25,7 +25,7 @@
                               x:Name="BoardNameSelected"
                               SelectionChanged="BoardNameSelected_SelectionChanged" HorizontalAlignment="Left" VerticalAlignment="Top"
                             />
-                    <Button x:Name="AddTask" Width="110" Content="Добавить задачу" Margin="20,0,0,0"/>
+                    <Button x:Name="AddTask" Width="110" Content="Добавить задачу" Margin="20,0,0,0" Click="AddTask_Click"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top"  x:Name="MainStack">
                     <ListBox x:Name="Board" ItemsSource="{Binding boardModel, Mode=TwoWay}" SelectionChanged="Board_SelectionChanged"  BorderThickness="0" VerticalAlignment="Top">
