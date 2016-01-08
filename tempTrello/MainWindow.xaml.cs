@@ -671,62 +671,12 @@ namespace tempTrello
                 stackPanel.Arrange(new Rect(0, 0, stackPanel.DesiredSize.Width, stackPanel.DesiredSize.Height));
                 stackPanel.UpdateLayout();
             }
-            /*StackPanel test2 = sender as StackPanel;
-            StackPanel stackPanel = new StackPanel();
-            TextBlock foundListBox;
-
-            for (int i = 0; i != updateCount2; i++)
-            {
-                foundListBox =
-                    FindChild<TextBlock>(Application.Current.MainWindow, string.Format("ListName{0}", i));
-                stackPanel = foundListBox.Parent as StackPanel;
-                if (heigth2 > stackPanel.ActualHeight)
-                {
-                    stackPanel.Height = heigth2 + heigth2;
-                }
-                if (width2 > stackPanel.ActualWidth)
-                    stackPanel.Width = width2;
-
-                stackPanel.RenderSize = new Size(Width, heigth);
-
-                stackPanel.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
-                stackPanel.Arrange(new Rect(0, 0, stackPanel.DesiredSize.Width, stackPanel.DesiredSize.Height));
-                stackPanel.UpdateLayout();
-            }*/
-            /*TextBlock foundTextBox =
-                FindChild<TextBlock>(Application.Current.MainWindow, "CardDesc");
-            foundTextBox.Name = foundTextBox.Name + Convert.ToString(updateCount);
-            stackPanel = foundTextBox.Parent as StackPanel;
-            stackPanel = stackPanel.Parent as StackPanel;
-            if (heigth <= stackPanel.ActualHeight)
-                heigth = stackPanel.ActualHeight;
-            if (width <= stackPanel.ActualWidth)
-                width = stackPanel.ActualWidth;
-            for (int i = 0; i != updateCount; i++)
-            {
-                foundTextBox =
-                FindChild<TextBlock>(Application.Current.MainWindow, string.Format("CardDesc{0}", i));
-
-                stackPanel = foundTextBox.Parent as StackPanel;
-                if (heigth > stackPanel.ActualHeight)
-                {
-                    stackPanel.Height = heigth;
-                }
-                if (width > stackPanel.ActualWidth)
-                    stackPanel.Width = width;
-
-                stackPanel.RenderSize = new Size(Width, heigth);
-
-                stackPanel.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
-                stackPanel.Arrange(new Rect(0, 0, stackPanel.DesiredSize.Width, stackPanel.DesiredSize.Height));
-                stackPanel.UpdateLayout();
-                string test = "";
-            }*/
+            
         }
 
         private void AddTask_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
     }
     public static class RemoveChildHelper
