@@ -1,21 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Xaml;
-using System.Xml;
 using tempTrello.Model;
 
 namespace tempTrello
@@ -208,37 +199,7 @@ namespace tempTrello
 
 
             }
-            /*TextBlock foundTextBox =
-                FindChild<TextBlock>(Application.Current.MainWindow, "CardDesc");
-            foundTextBox.Name = foundTextBox.Name + Convert.ToString(updateCount);
-            stackPanel = foundTextBox.Parent as StackPanel;
-            stackPanel = stackPanel.Parent as StackPanel;
-            if (heigth <= stackPanel.ActualHeight)
-                heigth = stackPanel.ActualHeight;
-            if (width <= stackPanel.ActualWidth)
-                width = stackPanel.ActualWidth;
-            for (int i = 0; i != updateCount; i++)
-            {
-                foundTextBox =
-                FindChild<TextBlock>(Application.Current.MainWindow, string.Format("CardDesc{0}", i));
-                if (foundTextBox != null)
-                {
-                    stackPanel = foundTextBox.Parent as StackPanel;
-                    if (heigth > stackPanel.ActualHeight)
-                    {
-                        stackPanel.Height = heigth;
-                    }
-                    if (width > stackPanel.ActualWidth)
-                        stackPanel.Width = width;
-
-                    stackPanel.RenderSize = new Size(Width, heigth);
-
-                    stackPanel.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
-                    stackPanel.Arrange(new Rect(0, 0, stackPanel.DesiredSize.Width, stackPanel.DesiredSize.Height));
-                    stackPanel.UpdateLayout();
-                }
-                string test = "";
-            }*/
+           
 
             normalView();
 
@@ -257,8 +218,7 @@ namespace tempTrello
 
                 if (heigth2 < stackPanel.ActualHeight)
                     heigth2 = stackPanel.ActualHeight;
-                /*if (width2 < stackPanel.ActualWidth)
-                    width2 = stackPanel.ActualWidth;*/
+              
 
                 updateCount2++;
                 foundListBox =
@@ -273,8 +233,7 @@ namespace tempTrello
                 {
                     stackPanel.Height = heigth2;
                 }
-                /*if (width2 > stackPanel.Width)
-                    stackPanel.Width = width2;*/
+                
 
                 stackPanel.RenderSize = new Size(Width, heigth2);
 
@@ -620,15 +579,7 @@ namespace tempTrello
 
         private void StacPanelList_TargetUpdated(object sender, DataTransferEventArgs e)
         {
-            /*StackPanel stackPanel = sender as StackPanel;
-
-            double heigth = stackPanel.ActualHeight;
-            double width = stackPanel.ActualWidth;
-
-            StackPanel foundTextBox =
-                FindChild<StackPanel>(Application.Current.MainWindow, "StacPanelList");
-
-            string str = "";*/
+            
             TextBlock foundListBox =
                FindChild<TextBlock>(Application.Current.MainWindow, "CardDesc");
             string str = "";
@@ -647,8 +598,7 @@ namespace tempTrello
                 StackPanel stackPanel = foundListBox.Parent as StackPanel;
                 if (heigth2 < stackPanel.ActualHeight)
                     heigth2 = stackPanel.ActualHeight;
-                /*if (width2 < stackPanel.ActualWidth)
-                    width2 = stackPanel.ActualWidth;*/
+                
                 updateCount2++;
                 foundListBox =
                     FindChild<TextBlock>(Application.Current.MainWindow, string.Format("ListName{0}", updateCount2));
@@ -662,9 +612,7 @@ namespace tempTrello
                 {
                     stackPanel.Height = heigth2;
                 }
-                /*if (width2 > stackPanel.Width)
-                    stackPanel.Width = width2;*/
-
+               
                 stackPanel.RenderSize = new Size(Width, heigth);
 
                 stackPanel.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
