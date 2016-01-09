@@ -32,7 +32,22 @@ namespace tempTrello
         int updateCount2 = 0;
         double heigth2 = 0;
         double width2 = 0;
+         string listId = "";
+        string taskIds = "";
+        public void parmListId(string _listId)
+        {
+            listId = _listId;
 
+        }
+
+        public string getListId()
+        {
+            return listId;
+        }
+        public void parmTaskId(string _taskId)
+        {
+            taskIds = _taskId;
+        }
         private void txtTarget_Drop(object sender, DragEventArgs e)
         {
             ((TextBlock)sender).Text = (string)e.Data.GetData(DataFormats.Text);
@@ -584,7 +599,11 @@ namespace tempTrello
                FindChild<TextBlock>(Application.Current.MainWindow, "CardDesc");
             string str = "";
         }
-
+        public object getListModel()
+        {
+            tempTrello.View.TrelloViewModel viewModel = grid1.DataContext as tempTrello.View.TrelloViewModel;
+            return viewModel;
+        }
         private void ListItems_SourceUpdated(object sender, DataTransferEventArgs e)
         {
             TextBlock foundListBox;
@@ -624,7 +643,8 @@ namespace tempTrello
 
         private void AddTask_Click(object sender, RoutedEventArgs e)
         {
-            
+            AddTaskWindow newWindow = new AddTaskWindow();
+            newWindow.ShowDialog();
         }
     }
     public static class RemoveChildHelper
