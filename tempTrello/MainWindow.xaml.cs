@@ -226,6 +226,8 @@ namespace tempTrello
             foundListBox =
                     FindChild<TextBlock>(Application.Current.MainWindow, string.Format("ListName{0}", 0));
             updateCount2 = 0;
+            double localHeigth = heigth2;
+            double localListBoxHeigth = 0;
             StackPanel stackPanel = new StackPanel();
             while (foundListBox != null)
             {
@@ -236,9 +238,17 @@ namespace tempTrello
               
 
                 updateCount2++;
+                ListBox foundListBox2 = new ListBox();
+                foundListBox2 = FindChild<ListBox>(stackPanel, "ListItems");
+                if (localListBoxHeigth < foundListBox2.ActualHeight)
+                    localListBoxHeigth = foundListBox2.ActualHeight;
                 foundListBox =
                     FindChild<TextBlock>(Application.Current.MainWindow, string.Format("ListName{0}", updateCount2));
             }
+            if (heigth2 < localListBoxHeigth)
+                heigth2 = heigth2;
+            else
+                heigth2 = localListBoxHeigth + 20;
             for (int i = 0; i != updateCount2; i++)
             {
                 foundListBox =
@@ -645,6 +655,8 @@ namespace tempTrello
         {
             AddTaskWindow newWindow = new AddTaskWindow();
             newWindow.ShowDialog();
+            tempTrello.View.TrelloViewModel viewModel = grid1.DataContext as tempTrello.View.TrelloViewModel;
+            viewModel.addTask(listId, taskIds);
         }
     }
     public static class RemoveChildHelper

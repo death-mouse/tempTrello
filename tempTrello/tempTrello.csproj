@@ -70,6 +70,7 @@
     <Compile Include="AddTaskWindow.xaml.cs">
       <DependentUpon>AddTaskWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Browser.cs" />
     <Compile Include="View\TrelloViewModel.cs" />
     <Page Include="AddTaskWindow.xaml">
       <SubType>Designer</SubType>
