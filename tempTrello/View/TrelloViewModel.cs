@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -71,11 +72,15 @@ namespace tempTrello.View
         public BindingList<BoardModel> boardModelCheckBox { get; set; }
         public BindingList<CardModel> cardModel { get; set; }
         public BindingList<ListModel> listModel { get; set; }
+        
         public  TrelloViewModel()
         {
             //return;
-            ITrello trello = new Trello("b9d8a6a9f2aaa03e9b6426c6c135a689");
-            trello.Authorize("9180c1adedfd5f7a48153af5c7beed8b45458df229f5262887beb6e4b9e16027");
+            Configuration currentConfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            currentConfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            ITrello trello = new Trello(currentConfig.AppSettings.Settings["AppKey"].Value);
+            
+            trello.Authorize(currentConfig.AppSettings.Settings["Token"].Value);
             boardModel = new BindingList<BoardModel>();
 
             /*var test = trello.Members.Me();
@@ -100,8 +105,12 @@ namespace tempTrello.View
         }
         public void getBoardListAndCard(string _boardId)
         {
-            ITrello trello = new Trello("b9d8a6a9f2aaa03e9b6426c6c135a689");
-            trello.Authorize("9180c1adedfd5f7a48153af5c7beed8b45458df229f5262887beb6e4b9e16027");
+
+            Configuration currentConfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            ITrello trello = new Trello(currentConfig.AppSettings.Settings["AppKey"].Value);
+            if (currentConfig.AppSettings.Settings["Token"] == null)
+                throw new Exception("Не указан token для доступа");
+            trello.Authorize(currentConfig.AppSettings.Settings["Token"].Value);
             Board boards = trello.Boards.WithId(_boardId);
             if (boardModel == null)
                 boardModel = new BindingList<BoardModel>();

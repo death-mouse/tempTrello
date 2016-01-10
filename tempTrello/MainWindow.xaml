@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="MainWindow"
-        xmlns:local="clr-namespace:tempTrello.View"
+        xmlns:local="clr-namespace:tempTrello.View" Closing="Window_Closing"
         >
     
     <Window.DataContext>

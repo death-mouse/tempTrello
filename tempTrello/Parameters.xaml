@@ -1,0 +1,34 @@
+﻿<Window x:Class="tempTrello.Parameters"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:tempTrello"
+        mc:Ignorable="d"
+        Title="Параметры доступа" Height="300" Width="300" ResizeMode="NoResize">
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Ключ приложения" HorizontalAlignment="Center"/>
+                <TextBox x:Name="AppKey" IsEnabled="False"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Ключ доступа Token" HorizontalAlignment="Center"/>
+                <TextBox x:Name="Token"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Пользователь для SD" HorizontalAlignment="Center"/>
+                <TextBox x:Name="User"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Пароль для SD" HorizontalAlignment="Center"/>
+                <TextBox x:Name="Password"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="ДОМЕН для SD" HorizontalAlignment="Center"/>
+                <TextBox x:Name="Domian"/>
+            </StackPanel>
+            <Button x:Name="Closed" Content="OK" Click="Closed_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

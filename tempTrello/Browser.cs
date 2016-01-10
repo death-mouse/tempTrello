@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Configuration;
 using System.IO;
 using System.Net;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace tempTrello
 {
+
     public class Browser
     {
         public Browser()
@@ -26,7 +29,9 @@ namespace tempTrello
                     hwrq.Credentials = CredentialCache.DefaultNetworkCredentials;
                 else
                 {
-
+                    Configuration currentConfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                    Encryptor encryptor = new Encryptor(currentConfig.AppSettings.Settings["Password"].Value);
+                    hwrq.Credentials = new NetworkCredential(currentConfig.AppSettings.Settings["User"].Value, encryptor.EncryptStr, currentConfig.AppSettings.Settings["Domian"].Value);
                 }
                 hwrq.CookieContainer = Cookies;
                 using (HttpWebResponse hwrs = (HttpWebResponse)hwrq.GetResponse())
@@ -125,4 +130,5 @@ namespace tempTrello
             return Request;
         }
     }
+   
 }

@@ -8,6 +8,7 @@ using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using tempTrello.Model;
+using System.Configuration;
 
 namespace tempTrello
 {
@@ -18,7 +19,39 @@ namespace tempTrello
     {
         public MainWindow()
         {
-            InitializeComponent();
+            Configuration currentConfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            if (currentConfig.AppSettings.Settings["AppKey"] == null)
+                currentConfig.AppSettings.Settings.Add(new KeyValueConfigurationElement("AppKey", ""));
+            currentConfig.AppSettings.Settings["AppKey"].Value = "b9d8a6a9f2aaa03e9b6426c6c135a689";
+            currentConfig.Save(ConfigurationSaveMode.Modified, true);
+            ConfigurationManager.RefreshSection("appSettings");
+            analizeParameters();
+              InitializeComponent();
+          
+            
+            
+
+
+        }
+        private void analizeParameters()
+        {
+            bool needAddParameters = false;
+            Configuration currentConfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            if (currentConfig.AppSettings.Settings["AppKey"] == null)
+                needAddParameters = true;
+            if (currentConfig.AppSettings.Settings["Token"] == null)
+                needAddParameters = true;
+            if (currentConfig.AppSettings.Settings["User"] == null)
+                needAddParameters = true;
+            if (currentConfig.AppSettings.Settings["Password"] == null)
+                needAddParameters = true;
+            if (currentConfig.AppSettings.Settings["Domian"] == null)
+                needAddParameters = true;
+            if (needAddParameters)
+            {
+                Parameters parameters = new Parameters();
+                parameters.ShowDialog();
+            }
         }
         private void lbl1_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -657,6 +690,14 @@ namespace tempTrello
             newWindow.ShowDialog();
             tempTrello.View.TrelloViewModel viewModel = grid1.DataContext as tempTrello.View.TrelloViewModel;
             viewModel.addTask(listId, taskIds);
+        }
+
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            Configuration currentConfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+           
+            currentConfig.Save(ConfigurationSaveMode.Modified, true);
+            ConfigurationManager.RefreshSection("appSettings");
         }
     }
     public static class RemoveChildHelper
