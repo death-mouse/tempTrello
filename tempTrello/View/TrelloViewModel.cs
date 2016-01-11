@@ -5,7 +5,9 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Web;
 using tempTrello.Model;
 using TrelloNet;
 
@@ -103,12 +105,12 @@ namespace tempTrello.View
             }
 
             browser = new Browser();
-            /*string document = browser.GET("http://servicedesk.gradient.ru/", Encoding.UTF8);
+            string document = browser.GET("http://servicedesk.gradient.ru/", Encoding.UTF8);
             if (document == null)
                 document = browser.GET("http://servicedesk.gradient.ru/", Encoding.UTF8);
             if (document == null)
                 document = browser.GET("http://servicedesk.gradient.ru/", Encoding.UTF8);
-            document = browser.GET("http://servicedesk.gradient.ru/api/task", Encoding.UTF8);*/
+            //document = browser.GET("http://servicedesk.gradient.ru/api/task", Encoding.UTF8);
             string test = "";
 
         }
@@ -143,6 +145,39 @@ namespace tempTrello.View
                     if (cardModel == null)
                         cardModel = new BindingList<CardModel>();
                     memberModel = new BindingList<MemberModel>();
+                    if(card.Desc == "")
+                    {
+                        /*string document = browser.GET(string.Format("http://servicedesk.gradient.ru/task/view/{0}", card.Name), Encoding.UTF8);
+                        if(document != null)
+                        {
+                            string descr = "";
+                            Regex regex = new Regex("<p class=\"task-name\">(.*?)</p>");
+                            MatchCollection mc = regex.Matches(document);
+                            if(mc.Count != 0)
+                                descr = string.Format("Название:\n{0}\n", HttpUtility.HtmlDecode(mc[0].Groups[1].Value.Replace("<br/>","\n")));
+                            else
+                            {
+                                regex = new Regex("<input class=\".*?\" id=\"name\" maxlength=\"500\" name=\"name\" type=\"text\" value=\"(.*?)\" />");
+                                //<input class="width98 big required" id="name" maxlength="500" name="name" type="text" value="ЕСС. Обработка по получению данных из ЗУП через Веб-сервис" />
+                                mc = regex.Matches(document);
+                                if(mc.Count != 0)
+                                    descr = string.Format("Название:\n{0}\n", HttpUtility.HtmlDecode(mc[0].Groups[1].Value.Replace("<br/>", "\n")));
+                            }
+                            regex = new Regex("<p class=\"task-description\">(.*?)</p>");
+                            mc = regex.Matches(document);
+                            if(mc.Count != 0)
+                                descr += string.Format("Описание:\n{0}",HttpUtility.HtmlDecode( mc[0].Groups[1].Value.Replace("<br/>", "\n")));
+                            else
+                            {
+                                regex = new Regex("<textarea class=\".*?\" cols=\".*?\" id=\"description\" name=\"description\" rows=\".*?\">[\\s|\\S](.*?)[\\s|\\S]</textarea>");
+                                mc = regex.Matches(document);
+                                if (mc.Count != 0)
+                                    descr += string.Format("Описание:\n{0}", HttpUtility.HtmlDecode(mc[0].Groups[1].Value.Replace("<br/>", "\n")));
+                            }
+                            card.Desc = descr;
+                            //trello.Cards.Update(card);
+                        }*/
+                    }
                     foreach(string memberId in card.IdMembers)
                     {
                         Member member = trello.Members.WithId(memberId);
