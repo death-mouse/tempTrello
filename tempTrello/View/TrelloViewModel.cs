@@ -146,7 +146,7 @@ namespace tempTrello.View
                     foreach(string memberId in card.IdMembers)
                     {
                         Member member = trello.Members.WithId(memberId);
-                        memberModel.Add(new MemberModel() { Id = member.Id, AvatarHash = string.Format("https://trello-avatars.s3.amazonaws.com/{0}/30.png",member.AvatarHash), Bio = member.Bio, Username = member.Username });
+                        memberModel.Add(new MemberModel() { Id = member.Id, AvatarHash = string.Format("https://trello-avatars.s3.amazonaws.com/{0}/30.png",member.AvatarHash), Bio = member.FullName, Username = member.Username });
                    
                     }
                     cardModel.Add(new CardModel() { Id = card.Id,

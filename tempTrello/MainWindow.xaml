@@ -74,7 +74,7 @@
                                                                             <TextBlock x:Name="CardDesc" Text="{Binding Desc, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"  TargetUpdated="MontantTotal_TargetUpdated"  SourceUpdated="ListItems_SourceUpdated"  FontStyle="Italic" TextWrapping="Wrap" Width="300" VerticalAlignment="Top" />
                                                                             <DatePicker x:Name="DueDate" SelectedDate="{Binding Due, Mode=TwoWay}" IsEnabled="False"/>
                                                                             <StackPanel Orientation="Horizontal">
-                                                                                <Image Source="{Binding User/AvatarHash , Mode=TwoWay}"/>
+                                                                                <Image Source="{Binding User/AvatarHash , Mode=TwoWay}" ToolTip="{Binding User/Bio, Mode=TwoWay}"/>
                                                                             </StackPanel>
                                                                         </StackPanel>
                                                                     </Border>
