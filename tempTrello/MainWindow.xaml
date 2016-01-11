@@ -63,12 +63,23 @@
                                                         </ListBox.ItemsPanel>
                                                         <ListBox.ItemTemplate>
                                                             <DataTemplate>
-                                                                <StackPanel AllowDrop="True"  x:Name="StacPanelList" Drop="StacPanelList_Drop" MouseDown="StacPanelList_MouseDown"  VerticalAlignment="Top" TargetUpdated="ListItems_SourceUpdated" DataContextChanged="StacPanelList_DataContextChanged" SourceUpdated="StacPanelList_SourceUpdated">
-                                                                    <StackPanel Orientation="Vertical" VerticalAlignment="Top">
-                                                                        <TextBlock x:Name="CardName" Text="{Binding Name, Mode=TwoWay}" FontWeight="Bold" TextWrapping="Wrap" Width="300" VerticalAlignment="Top"/>
-                                                                        <TextBlock x:Name="CardDesc" Text="{Binding Desc, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"  TargetUpdated="MontantTotal_TargetUpdated"  SourceUpdated="ListItems_SourceUpdated"  FontStyle="Italic" TextWrapping="Wrap" Width="300" VerticalAlignment="Top" />
-                                                                    </StackPanel>
+                                                                   
+                                                                    <StackPanel AllowDrop="True"  x:Name="StacPanelList" Drop="StacPanelList_Drop" MouseDown="StacPanelList_MouseDown"  VerticalAlignment="Top" TargetUpdated="ListItems_SourceUpdated" DataContextChanged="StacPanelList_DataContextChanged" SourceUpdated="StacPanelList_SourceUpdated">
+
+                                                                    <Border Margin="5" Padding="5" Background="LightYellow" 
+                                                                              BorderBrush="SteelBlue" BorderThickness="3,5,3,5" CornerRadius="3"
+                                                                              VerticalAlignment="Top">
+                                                                        <StackPanel Orientation="Vertical" VerticalAlignment="Top">
+                                                                            <TextBlock x:Name="CardName" Text="{Binding Name, Mode=TwoWay}" FontWeight="Bold" TextWrapping="Wrap" Width="300" VerticalAlignment="Top"/>
+                                                                            <TextBlock x:Name="CardDesc" Text="{Binding Desc, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"  TargetUpdated="MontantTotal_TargetUpdated"  SourceUpdated="ListItems_SourceUpdated"  FontStyle="Italic" TextWrapping="Wrap" Width="300" VerticalAlignment="Top" />
+                                                                            <DatePicker x:Name="DueDate" SelectedDate="{Binding Due, Mode=TwoWay}" IsEnabled="False"/>
+                                                                            <StackPanel Orientation="Horizontal">
+                                                                                <Image Source="{Binding User/AvatarHash , Mode=TwoWay}"/>
+                                                                            </StackPanel>
+                                                                        </StackPanel>
+                                                                    </Border>
                                                                 </StackPanel>
+                                                                
                                                             </DataTemplate>
                                                         </ListBox.ItemTemplate>
                                                     </ListBox>

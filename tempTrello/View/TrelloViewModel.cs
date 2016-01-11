@@ -78,7 +78,7 @@ namespace tempTrello.View
         public BindingList<BoardModel> boardModelCheckBox { get; set; }
         public BindingList<CardModel> cardModel { get; set; }
         public BindingList<ListModel> listModel { get; set; }
-
+        public BindingList<MemberModel> memberModel { get; set; }
         public TrelloViewModel()
         {
             //return;
@@ -103,12 +103,12 @@ namespace tempTrello.View
             }
 
             browser = new Browser();
-            string document = browser.GET("http://servicedesk.gradient.ru/", Encoding.UTF8);
+            /*string document = browser.GET("http://servicedesk.gradient.ru/", Encoding.UTF8);
             if (document == null)
                 document = browser.GET("http://servicedesk.gradient.ru/", Encoding.UTF8);
             if (document == null)
                 document = browser.GET("http://servicedesk.gradient.ru/", Encoding.UTF8);
-            document = browser.GET("http://servicedesk.gradient.ru/api/task", Encoding.UTF8);
+            document = browser.GET("http://servicedesk.gradient.ru/api/task", Encoding.UTF8);*/
             string test = "";
 
         }
@@ -142,8 +142,24 @@ namespace tempTrello.View
                     cardModel = listModel[y].CardModel;
                     if (cardModel == null)
                         cardModel = new BindingList<CardModel>();
-                    cardModel.Add(new CardModel() { Id = card.Id, IdBoard = card.IdBoard, IdList = card.IdList, Name = card.Name, Desc = card.Desc != "" ? card.Desc : "Пусто" });
+                    memberModel = new BindingList<MemberModel>();
+                    foreach(string memberId in card.IdMembers)
+                    {
+                        Member member = trello.Members.WithId(memberId);
+                        memberModel.Add(new MemberModel() { Id = member.Id, AvatarHash = string.Format("https://trello-avatars.s3.amazonaws.com/{0}/30.png",member.AvatarHash), Bio = member.Bio, Username = member.Username });
+                   
+                    }
+                    cardModel.Add(new CardModel() { Id = card.Id,
+                                                    IdBoard = card.IdBoard,
+                                                    IdList = card.IdList,
+                                                    Name = card.Name,
+                                                    Desc = card.Desc != "" ? card.Desc : "Пусто",
+                                                    Due = Convert.ToDateTime(card.Due),
+                                                    User = memberModel
+                                                  }
+                                 );
                     listModel[y].CardModel = cardModel;
+                    
                 }
                 if (cards.Count() == 0)
                 {

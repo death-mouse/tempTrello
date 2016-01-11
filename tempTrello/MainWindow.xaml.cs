@@ -386,6 +386,8 @@ namespace tempTrello
             
             TextBlock foundListBox =
                FindChild<TextBlock>(Application.Current.MainWindow, "ListName");
+            if (foundListBox == null)
+                return;
             stackPanel = foundListBox.Parent as StackPanel;
             if (heigth2 <= stackPanel.ActualHeight)
                 heigth2 = stackPanel.ActualHeight;
@@ -416,7 +418,9 @@ namespace tempTrello
                 FindChild<TextBlock>(Application.Current.MainWindow, "CardDesc");
             foundTextBox.Name = foundTextBox.Name + Convert.ToString(updateCount);
             stackPanel = foundTextBox.Parent as StackPanel;
-            stackPanel = stackPanel.Parent as StackPanel;
+            Border border = stackPanel.Parent as Border;
+            //stackPanel = stackPanel.Parent as StackPanel;
+            stackPanel = border.Child as StackPanel;
             if (heigth <= stackPanel.ActualHeight)
                 heigth = stackPanel.ActualHeight;
             if (width <= stackPanel.ActualWidth)
@@ -519,9 +523,13 @@ namespace tempTrello
 
             listBox = elements[1] as ListBox;
             fr = listBox.ItemTemplate;
+            Border border = fr.LoadContent() as Border;
+            //elements = border.Children;
             stackPanel = fr.LoadContent() as StackPanel;
             elements = stackPanel.Children;
-            stackPanel = elements[0] as StackPanel;
+            border = elements[0] as Border;
+            //stackPanel = elements[0] as StackPanel;
+            stackPanel = border.Child as StackPanel; 
             elements = stackPanel.Children;
             string str = "";
         }

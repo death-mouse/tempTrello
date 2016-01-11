@@ -21,10 +21,10 @@ namespace tempTrello.Model
                 }
             }
         }
-        private string user;
-        public string User
+        private BindingList<MemberModel> user;
+        public BindingList<MemberModel> User
         {
-            get
+             get
             {
                 return user;
             }
@@ -37,6 +37,7 @@ namespace tempTrello.Model
                 }
             }
         }
+        
         private string id;
         public string Id
         {
