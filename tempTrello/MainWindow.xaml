@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="MainWindow"
-        xmlns:local="clr-namespace:tempTrello.View" Closing="Window_Closing"
+        xmlns:local="clr-namespace:tempTrello.View" 
+        Closing="Window_Closing"
         >
-    
+
     <Window.DataContext>
         <local:TrelloViewModel/>
     </Window.DataContext>
@@ -18,14 +19,15 @@
             <StackPanel Orientation="Vertical" VerticalAlignment="Top">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Выбор доски" Width="90"/>
-                    <ComboBox Width="150" ItemsSource="{Binding Path=boardModelCheckBox}"
-                              DisplayMemberPath="Name"
-                              SelectedValue="Id"
-                              SelectedValuePath="Id"
-                              x:Name="BoardNameSelected"
-                              SelectionChanged="BoardNameSelected_SelectionChanged" HorizontalAlignment="Left" VerticalAlignment="Top"
+                    <ComboBox Width="150" ItemsSource="{Binding boardModelCheckBox}"
+            			DisplayMemberPath="Name"
+            			SelectedValue="Id"
+            			SelectedValuePath="Id"
+            			x:Name="BoardNameSelected"
+            			SelectionChanged="BoardNameSelected_SelectionChanged" HorizontalAlignment="Left" VerticalAlignment="Top"
                             />
                     <Button x:Name="AddTask" Width="110" Content="Добавить задачу" Margin="20,0,0,0" Click="AddTask_Click"/>
+                    <Button x:Name="Parameters" Content="Параметры" Margin="20,0,0,0" Click="Parameters_Click"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top"  x:Name="MainStack">
                     <ListBox x:Name="Board" ItemsSource="{Binding boardModel, Mode=TwoWay}" SelectionChanged="Board_SelectionChanged"  BorderThickness="0" VerticalAlignment="Top">
@@ -40,37 +42,37 @@
                                     <TextBlock x:Name="NameBoard" Text="{Binding Name, Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" TextDecorations="Underline"/>
                                     <TextBlock x:Name="DescBoard" Text="{Binding Desc, Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="16" FontStyle="Italic"/>
                                     <ListBox x:Name="List" ItemsSource="{Binding ListModel, Mode=TwoWay}" VerticalAlignment="Top" SelectionChanged="Board_SelectionChanged" BorderThickness="2"  >
-                                        
+
                                         <ListBox.ItemsPanel>
                                             <ItemsPanelTemplate>
                                                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top"/>
                                                 <!--<WrapPanel  VerticalAlignment="Top"/>-->
                                             </ItemsPanelTemplate>
                                         </ListBox.ItemsPanel>
-                                        
+
                                         <ListBox.ItemTemplate>
                                             <DataTemplate>
                                                 <!--<StackPanel VerticalAlignment="Top" Orientation="Horizontal">-->
-                                                    <StackPanel VerticalAlignment="Top" Orientation="Vertical" Loaded="StackPanel_Loaded" x:Name="Tested2">
-                                                        <TextBlock x:Name="ListName" Text="{Binding Name, Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" TextDecorations="Underline"/>
-                                                        <ListBox x:Name="ListItems" ItemsSource="{Binding CardModel, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" SourceUpdated="ListItems_SourceUpdated" TargetUpdated="ListItems_TargetUpdated" SelectionMode="Extended" VerticalAlignment="Top">
-                                                            <ListBox.ItemsPanel>
-                                                                <ItemsPanelTemplate>
-                                                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" x:Name="StackItemList" />
-                                                                </ItemsPanelTemplate>
-                                                            </ListBox.ItemsPanel>
-                                                            <ListBox.ItemTemplate>
-                                                                <DataTemplate>
+                                                <StackPanel VerticalAlignment="Top" Orientation="Vertical" Loaded="StackPanel_Loaded" x:Name="Tested2">
+                                                    <TextBlock x:Name="ListName" Text="{Binding Name, Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" TextDecorations="Underline"/>
+                                                    <ListBox x:Name="ListItems" ItemsSource="{Binding CardModel, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" SourceUpdated="ListItems_SourceUpdated" TargetUpdated="ListItems_TargetUpdated" SelectionMode="Extended" VerticalAlignment="Top">
+                                                        <ListBox.ItemsPanel>
+                                                            <ItemsPanelTemplate>
+                                                                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" x:Name="StackItemList" />
+                                                            </ItemsPanelTemplate>
+                                                        </ListBox.ItemsPanel>
+                                                        <ListBox.ItemTemplate>
+                                                            <DataTemplate>
                                                                 <StackPanel AllowDrop="True"  x:Name="StacPanelList" Drop="StacPanelList_Drop" MouseDown="StacPanelList_MouseDown"  VerticalAlignment="Top" TargetUpdated="ListItems_SourceUpdated" DataContextChanged="StacPanelList_DataContextChanged" SourceUpdated="StacPanelList_SourceUpdated">
-                                                                        <StackPanel Orientation="Vertical" VerticalAlignment="Top">
-                                                                            <TextBlock x:Name="CardName" Text="{Binding Name, Mode=TwoWay}" FontWeight="Bold" TextWrapping="Wrap" Width="300" VerticalAlignment="Top"/>
-                                                                            <TextBlock x:Name="CardDesc" Text="{Binding Desc, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"  TargetUpdated="MontantTotal_TargetUpdated"  SourceUpdated="ListItems_SourceUpdated"  FontStyle="Italic" TextWrapping="Wrap" Width="300" VerticalAlignment="Top" />
-                                                                        </StackPanel>
+                                                                    <StackPanel Orientation="Vertical" VerticalAlignment="Top">
+                                                                        <TextBlock x:Name="CardName" Text="{Binding Name, Mode=TwoWay}" FontWeight="Bold" TextWrapping="Wrap" Width="300" VerticalAlignment="Top"/>
+                                                                        <TextBlock x:Name="CardDesc" Text="{Binding Desc, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"  TargetUpdated="MontantTotal_TargetUpdated"  SourceUpdated="ListItems_SourceUpdated"  FontStyle="Italic" TextWrapping="Wrap" Width="300" VerticalAlignment="Top" />
                                                                     </StackPanel>
-                                                                </DataTemplate>
-                                                            </ListBox.ItemTemplate>
-                                                        </ListBox>
-                                                    </StackPanel>
+                                                                </StackPanel>
+                                                            </DataTemplate>
+                                                        </ListBox.ItemTemplate>
+                                                    </ListBox>
+                                                </StackPanel>
                                                 <!--</StackPanel>-->
                                             </DataTemplate>
                                         </ListBox.ItemTemplate>

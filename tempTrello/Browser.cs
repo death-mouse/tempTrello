@@ -30,8 +30,8 @@ namespace tempTrello
                 else
                 {
                     Configuration currentConfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-                    Encryptor encryptor = new Encryptor(currentConfig.AppSettings.Settings["Password"].Value);
-                    hwrq.Credentials = new NetworkCredential(currentConfig.AppSettings.Settings["User"].Value, encryptor.EncryptStr, currentConfig.AppSettings.Settings["Domian"].Value);
+                    Decryptor decryptor = new Decryptor(currentConfig.AppSettings.Settings["Password"].Value);
+                    hwrq.Credentials = new NetworkCredential(currentConfig.AppSettings.Settings["User"].Value, decryptor.DescryptStr, currentConfig.AppSettings.Settings["Domian"].Value);
                 }
                 hwrq.CookieContainer = Cookies;
                 using (HttpWebResponse hwrs = (HttpWebResponse)hwrq.GetResponse())
@@ -103,7 +103,7 @@ namespace tempTrello
                                "q=0.5,en"
                            };
             string[] accepts = {
-                              "application/xml"
+                              "application/json"
                           };
             DecompressionMethods[] dmethods = {
                                      DecompressionMethods.Deflate,

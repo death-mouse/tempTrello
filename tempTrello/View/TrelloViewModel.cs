@@ -31,8 +31,14 @@ namespace tempTrello.View
         /// <param name="_tasksId">Список задач через "," которые нужно добавить </param>
         public void addTask(string listId, string _tasksId)
         {
-            ITrello trello = new Trello("b9d8a6a9f2aaa03e9b6426c6c135a689");
-            trello.Authorize("9180c1adedfd5f7a48153af5c7beed8b45458df229f5262887beb6e4b9e16027");
+            if (_tasksId == "")
+                return;
+            Configuration currentConfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            /*ITrello trello = new Trello("b9d8a6a9f2aaa03e9b6426c6c135a689");
+            trello.Authorize("9180c1adedfd5f7a48153af5c7beed8b45458df229f5262887beb6e4b9e16027");*/
+            ITrello trello = new Trello(currentConfig.AppSettings.Settings["AppKey"].Value);
+
+            trello.Authorize(currentConfig.AppSettings.Settings["Token"].Value);
             List list = trello.Lists.WithId(listId);
             string[] tasksId = _tasksId.Split(new char[] { ',' });
             BoardModel borad = findBoardModel(boardModel, list.IdBoard);
@@ -72,17 +78,17 @@ namespace tempTrello.View
         public BindingList<BoardModel> boardModelCheckBox { get; set; }
         public BindingList<CardModel> cardModel { get; set; }
         public BindingList<ListModel> listModel { get; set; }
-        
-        public  TrelloViewModel()
+
+        public TrelloViewModel()
         {
             //return;
             Configuration currentConfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             currentConfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             ITrello trello = new Trello(currentConfig.AppSettings.Settings["AppKey"].Value);
-            
+
             trello.Authorize(currentConfig.AppSettings.Settings["Token"].Value);
             boardModel = new BindingList<BoardModel>();
-
+            
             /*var test = trello.Members.Me();
             System.Collections.Generic.IEnumerable<Organization> organization = trello.Organizations.ForMe();
             Organization org = organization.ElementAt(0);*/
@@ -98,9 +104,12 @@ namespace tempTrello.View
 
             browser = new Browser();
             string document = browser.GET("http://servicedesk.gradient.ru/", Encoding.UTF8);
-            if(document == null)
+            if (document == null)
                 document = browser.GET("http://servicedesk.gradient.ru/", Encoding.UTF8);
-
+            if (document == null)
+                document = browser.GET("http://servicedesk.gradient.ru/", Encoding.UTF8);
+            document = browser.GET("http://servicedesk.gradient.ru/api/task", Encoding.UTF8);
+            string test = "";
 
         }
         public void getBoardListAndCard(string _boardId)

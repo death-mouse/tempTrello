@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using tempTrello.Model;
 using System.Configuration;
+using TrelloNet;
 
 namespace tempTrello
 {
@@ -161,7 +162,22 @@ namespace tempTrello
 
             control.UpdateLayout();
             stackPanel = new StackPanel();
-            
+            Configuration currentConfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            currentConfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            ITrello trello = new Trello(currentConfig.AppSettings.Settings["AppKey"].Value);
+
+            trello.Authorize(currentConfig.AppSettings.Settings["Token"].Value);
+            Card card = trello.Cards.WithId(cardModelOld.Id);
+            card.IdList = cardModelNew.IdList;
+            trello.Cards.Update(card);
+            normal();
+            normalView();
+
+
+        }
+        private void normal()
+        {
+            StackPanel stackPanel;
             TextBlock foundListBox;
 
 
@@ -247,11 +263,6 @@ namespace tempTrello
 
 
             }
-           
-
-            normalView();
-
-
         }
         private void normalView()
         {
@@ -690,6 +701,8 @@ namespace tempTrello
             newWindow.ShowDialog();
             tempTrello.View.TrelloViewModel viewModel = grid1.DataContext as tempTrello.View.TrelloViewModel;
             viewModel.addTask(listId, taskIds);
+            normal();
+            normalView();
         }
 
         private void Window_Closing(object sender, CancelEventArgs e)
@@ -698,6 +711,12 @@ namespace tempTrello
            
             currentConfig.Save(ConfigurationSaveMode.Modified, true);
             ConfigurationManager.RefreshSection("appSettings");
+        }
+
+        private void Parameters_Click(object sender, RoutedEventArgs e)
+        {
+            Parameters parameters = new Parameters();
+            parameters.ShowDialog();
         }
     }
     public static class RemoveChildHelper

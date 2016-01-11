@@ -1,10 +1,42 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 
 namespace tempTrello.Model
 {
     class CardModel : INotifyPropertyChanged
     {
-
+        private DateTime due;
+        public DateTime Due
+        {
+            get
+            {
+                return due;
+            }
+            set
+            {
+                if(due != value)
+                {
+                    due = value;
+                    OnPropertyChanged("Due");
+                }
+            }
+        }
+        private string user;
+        public string User
+        {
+            get
+            {
+                return user;
+            }
+            set
+            {
+                if (user != value)
+                {
+                    user = value;
+                    OnPropertyChanged("User");
+                }
+            }
+        }
         private string id;
         public string Id
         {
